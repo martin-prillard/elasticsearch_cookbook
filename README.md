@@ -54,6 +54,12 @@ Or for a 1-node cluster:
 docker-compose -f docker-compose-1-nodes.yml up -d
 ```
 
+Or only one node without Kibana:
+```bash
+docker network create elastic
+docker run --name es01 --net elastic -p 9200:9200 -e "discovery.type=single-node" -e "xpack.security.enabled=false" -it -m 1GB docker.elastic.co/elasticsearch/elasticsearch:9.2.2
+```
+
 Verify that Elasticsearch is running on `https://localhost:9200`:
 
 ```bash
@@ -79,15 +85,6 @@ source .venv/bin/activate  # On macOS/Linux
 
 jupyter lab
 ```
-
-## Contents
-
-- **ES_TD1.ipynb**: First training exercise notebook
-- **ES_TD2.ipynb**: Second training exercise notebook
-- **ES_TD1.postman_collection.json**: Postman collection for ES_TD1
-- **ES_TD2.postman_collection.json**: Postman collection for ES_TD2
-- **docker-compose.yml**: Single-node Elasticsearch cluster configuration
-- **docker-compose-2-nodes.yml**: Two-node Elasticsearch cluster configuration
 
 ## Usage
 
