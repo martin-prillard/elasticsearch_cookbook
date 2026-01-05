@@ -36,6 +36,15 @@ This will create a virtual environment and install all required packages (elasti
 
 ### 3. Start Elasticsearch Cluster
 
+1. To launch one node without Kibana:
+
+```bash
+docker network create elastic
+docker run --name es01 --net elastic -p 9200:9200 -e "discovery.type=single-node" -e "xpack.security.enabled=false" -it -m 1GB docker.elastic.co/elasticsearch/elasticsearch:9.2.2
+```
+
+2. Then, for Elasticsearch Cluster:
+
 Start the Elasticsearch cluster using Docker Compose:
 
 ```bash
@@ -52,12 +61,6 @@ Or for a 1-node cluster:
 
 ```bash
 docker-compose -f docker-compose-1-nodes.yml up -d
-```
-
-Or only one node without Kibana:
-```bash
-docker network create elastic
-docker run --name es01 --net elastic -p 9200:9200 -e "discovery.type=single-node" -e "xpack.security.enabled=false" -it -m 1GB docker.elastic.co/elasticsearch/elasticsearch:9.2.2
 ```
 
 Verify that Elasticsearch is running on `https://localhost:9200`:
@@ -107,4 +110,6 @@ Or for the 2-node cluster:
 ```bash
 docker-compose -f docker-compose-2-nodes.yml down
 ```
+
+
 
