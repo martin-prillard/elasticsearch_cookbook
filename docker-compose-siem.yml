@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   setup:
     image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
@@ -255,12 +253,12 @@ services:
     restart: unless-stopped
     user: root
     volumes:
-      - ./filebeat_suricata.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ./es_as_siem/filebeat_suricata.yml:/usr/share/filebeat/filebeat.yml:ro
       - ./suricata/logs:/var/log/suricata:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - certs:/usr/share/filebeat/config/certs:ro
-      - ./filebeat-entrypoint.sh:/usr/local/bin/filebeat-entrypoint.sh:ro
+      - ./es_as_siem/filebeat-entrypoint.sh:/usr/local/bin/filebeat-entrypoint.sh:ro
     entrypoint: ["/bin/bash", "/usr/local/bin/filebeat-entrypoint.sh"]
     depends_on:
       es01:
