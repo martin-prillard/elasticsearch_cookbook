@@ -8,4 +8,10 @@ dependencies = [
     "jupyterlab",
     "opentsne>=1.0.4",
     "plotly>=6.5.0",
+    "requests",
+    "urllib3",
+    "pyyaml",
+    "pandas",
+    "numpy",
+    "scikit-learn",
 ]
